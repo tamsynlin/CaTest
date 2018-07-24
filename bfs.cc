@@ -149,7 +149,7 @@ int main()
     cout << "Following is Depth First Traversal"
         " (starting from vertex 2) \n";
     g.DFS(2);
-    g.isCyclic()? cout << "Has loop?" <<  "Yes\n": cout << "Has loop?" << "No" << "\n";
+    g.isCyclic()? cout << "Has loop?" <<  "Yes\n": cout << "Has loop?" << "No\n";
  
     return 0;
 }
