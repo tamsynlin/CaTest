@@ -13,7 +13,6 @@ class Graph
 {
 private:
     int V;    // No. of vertices
-    int Loop;
  
     // Pointer to an array containing adjacency lists
     list<int> *adj;   
@@ -32,18 +31,12 @@ public:
 
     // DFS traversal of the vertices reachable from v
     void DFS(int v);
-
-    bool isCyclic()
-    {
-    	return this->Loop > 0 ? true:false;
-    };
 };
  
 Graph::Graph(int V)
 {
     this->V = V;
     adj = new list<int>[V];
-    Loop = 0;
 }
  
 void Graph::addEdge(int v, int w)
@@ -106,10 +99,6 @@ void Graph::DFSUtil(int v, bool visited[])
         {
             DFSUtil(i, visited);
         }
-        else
-        {
-        	Loop++;
-        }
     }
 }
  
@@ -120,9 +109,7 @@ void Graph::DFS(int v)
     // Mark all the vertices as not visited
     bool *visited = new bool[V];
     for (int i = 0; i < V; i++)
-    {
-    	visited[i] = false;
-    }
+        visited[i] = false;
  
     // Call the recursive helper function
     // to print DFS traversal
@@ -149,7 +136,7 @@ int main()
     cout << "Following is Depth First Traversal"
         " (starting from vertex 2) \n";
     g.DFS(2);
-    g.isCyclic()? cout << "Has loop?" <<  "Yes\n": cout << "Has loop?" << "No\n";
+    cout << "\n";
  
     return 0;
 }
