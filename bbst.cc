@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
- 
+#include <assert.h>
+
 /* A Binary Tree node */
 struct TNode
 {
@@ -112,7 +113,6 @@ struct TNode* deleteNode(struct TNode* root, int key)
         // then it lies in right subtree
         root->right = deleteNode(root->right, key);
     }
- 
     // if key is same as root's key, then This is the node
     // to be deleted
     else
@@ -131,8 +131,14 @@ struct TNode* deleteNode(struct TNode* root, int key)
             return temp;
         }
  
-        // node with two children: Get the inorder successor (smallest
-        // in the right subtree)
+        /* node with two children: Get the inorder successor (smallest
+           in the right subtree)
+           Node to be deleted has two children: Find inorder successor of the node. 
+           Copy contents of the inorder successor to the node and delete the inorder 
+           successor. Note that inorder predecessor can also be used.
+
+           The inorder successor is the node that has the lowest value in the right sub-tree
+        */
         struct TNode* temp = minValueNode(root->right);
  
         // Copy the inorder successor's content to this node
@@ -148,6 +154,9 @@ struct TNode* deleteNode(struct TNode* root, int key)
 /* returns maximum of two integers */
 int max(int a, int b)
 {
+    char *cp = NULL;
+    snprintf(cp, 10, "%s", "test");
+    assert(cp);
     return (a >= b)? a: b;
 } 
 
@@ -167,7 +176,14 @@ int height(struct TNode* node)
     return 1 + max(height(node->left), height(node->right));
 }
 
-/* Returns true if binary tree with root as root is height-balanced */
+/* Returns true if binary tree with root as root is height-balanced
+
+Consider a height-balancing scheme where following conditions should be checked to determine if a binary tree is balanced.
+An empty tree is height-balanced. A non-empty binary tree T is balanced if:
+1) Left subtree of T is balanced
+2) Right subtree of T is balanced
+3) The difference between heights of left subtree and right subtree is not more than 1.
+*/
 bool isBalanced(struct TNode *root)
 {
     int lh; /* for height of left subtree */
@@ -215,10 +231,14 @@ int main()
     printf("Inorder traversal of the modified tree \n");
     inorder(root);
 
-    if(isBalanced(root))
-      printf("Tree is balanced\n");
+    if (isBalanced(root))
+    {
+        printf("Tree is balanced\n");
+    }
     else
-      printf("Tree is not balanced\n");
+    {
+        printf("Tree is not balanced\n");
+    }
 
     printf("\nDelete 2\n");
     root = deleteNode(root, 2);
