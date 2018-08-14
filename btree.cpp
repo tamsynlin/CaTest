@@ -42,6 +42,7 @@ BinaryTreeNode* newBinaryTreeNode(int data)
     return temp;
 }
 
+//create a tree in preorder
 BinaryTreeNode* convertList2Tree(std::vector<int> *array, int index, BinaryTreeNode* &root)
 {
     // Base Case
@@ -64,7 +65,7 @@ BinaryTreeNode* convertList2Tree(std::vector<int> *array, int index, BinaryTreeN
 // linked representation of binary tree.
 void convertList2Binary(ListNode *head, BinaryTreeNode* &root)
 {
-    // queue to store the parent nodes
+    // queue to store the parent nodes, FIFO
     queue<BinaryTreeNode *> q;
  
     // Base Case

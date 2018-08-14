@@ -96,8 +96,6 @@ int finLongestOverAll(int *mat, int row, int column)
         }
     }
 
-    delete path;
-
     return longest;
 }
 
