@@ -18,6 +18,8 @@ void quickSort(int arr[], int left, int right)
             while (arr[j] > pivot)
                   j--;
 
+            // swap the elements to make sure everything on the left is smaller than pivot
+            // and everything on the right is bigger than pivot
             if (i <= j) {
                   tmp = arr[i];
                   arr[i] = arr[j];
@@ -71,7 +73,7 @@ void quickSortL(int arr[], int left, int right)
         }
     };
 
-    if (left != j)
+    if (left != j)  //j will stay at a number that is small or equal to left (pivot)
     {
         tmp = arr[left];
         arr[left] = arr[j];
@@ -149,8 +151,8 @@ int kthSmallest(int arr[], int l, int r, int k)
         if (pos-l > k-1)  // If position is more, recur for left subarray
             return kthSmallest(arr, l, pos-1, k);
  
-        // Else recur for right subarray
-        return kthSmallest(arr, pos+1, r, k-pos+l-1);
+        // Else recur for right subarray, start from pos++
+        return kthSmallest(arr, pos+1, r, k-(pos-l)-1);
     }
  
     // If k is more than number of elements in array
