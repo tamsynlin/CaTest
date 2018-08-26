@@ -23,7 +23,7 @@ class D
 
 class E
 {
-    int i ; 
+    int i;
     virtual void foo();
 };
 
@@ -42,7 +42,7 @@ class G
 
 class H
 {
-    int i ;
+    int i;
     /*
     Only the first virtual function in a class increases its size (compiler-dependent, 
     but on most - if not all - it's like this). All subsequent methods do not. Non-virtual 

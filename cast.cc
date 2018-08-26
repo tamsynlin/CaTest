@@ -14,6 +14,15 @@ class ParentWithVTable
         virtual ~ParentWithVTable () { }
 };
 
+/*
+ * C++ puts the virtual table pointer as the first element of a class, so the real layout of Derived is something like:
+
+struct __Derived
+{
+    function_ptr vtable; char empty;
+}
+ *
+ * */
 class Derived : public ParentWithoutVtable, public ParentWithVTable
 {
 };
@@ -70,6 +79,8 @@ has to know the full declaration of both types.
     printf("static_cast *b= %x\n", b);
     printf("C-Style casting *c= %x\n", c);
 
+    printf("\n\n\n");
+
     // Convert between CBaseX* and CBaseY*
     CBaseX* pX = new CBaseX();
     // Error, types pointed to are unrelated
@@ -92,6 +103,9 @@ has to know the full declaration of both types.
     // OK, implicit static_cast<> casting
     CBaseY* pY1 = static_cast<CBaseY*>(pD);
     printf("CBaseY* pY1 = %x\n", pY1);
+
+    CBaseX* pX1 = static_cast<CBaseX*>(pD);
+    printf("CBaseX* pX1 = %x\n", pX1);
 
     // OK, now pD1 = pD
     CDerived* pD1 = static_cast<CDerived*>(pY1);
